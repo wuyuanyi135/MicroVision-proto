@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package MicroVisionCGI;
+
+// The capabilities should be checked and implemented by the frontend. However, in the GRPC layer, the capabilities should also be enforced.
+service CGI {
+    rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
+}
+
+message GetVersionRequest {}
+message GetVersionResponse {
+    string version = 1;
+}
