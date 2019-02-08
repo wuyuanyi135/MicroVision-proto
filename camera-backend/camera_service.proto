@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "camera_definitions.proto";
+
+package CameraServer;
+
+// The capabilities should be checked and implemented by the frontend. However, in the GRPC layer, the capabilities should also be enforced.
+service CameraService {
+    // Get the list of drivers
+    rpc GetAvailableAdapters (google.protobuf.Empty) returns (AvailableAdaptersResponse) {
+    }
+
+    // Get devices with the adapter selector. If not provided, all devices are listed.
+    // The requested adapter (or all) should be updated upon this invocation.
+    // This function will update the id-map if cached.
+    rpc GetDevices (AdapterRequest) returns (DeviceListResponse) {}
+
+    // Get device descriptor by id. This method is rarely used. Query is mainly performed by the framework.
+    // The id will be cached by framework. The GetDevices function will invalidate the cache.
+    rpc QueryDeviceById (IdRequest) returns (DeviceInfo) {}
+
+    rpc OpenCamera(IdRequest) returns (google.protobuf.Empty) {}
+    rpc ShutdownCamera(IdRequest) returns (google.protobuf.Empty) {}
+
+    rpc ConfigureCamera(ConfigureRequest) returns (google.protobuf.Empty) {}
+    rpc GetConfiguration(IdRequest) returns (Configuration) {}
+    rpc GetStatus(IdRequest) returns (Status) {}
+    rpc Capture(IdRequest) returns (Frame) {}
+
+    // Continuous streaming the frames at the preconfigured frame rate.
+    // After the given number of frames captured, the stream is finalized.
+    // number_frame == 0 results in non-stopping capture. Cancel the stream to interrupt.
+    rpc Streaming(StreamingRequest) returns (stream FrameStream) {}
+
+    rpc ResetDevice(IdRequest) returns (google.protobuf.Empty) {}
+    rpc ControlDeviceState(DeviceControlRequest) returns (google.protobuf.Empty) {}
+}

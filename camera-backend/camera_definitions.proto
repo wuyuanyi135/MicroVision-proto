@@ -1,0 +1,118 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package CameraServer;
+message AdapterCapability {
+    bool should_shut_down = 1;
+}
+message AdapterInfo {
+    string name = 1;
+    string version = 2;
+    string description = 3;
+    // adapter initialized successfully
+    bool in_use = 4;
+
+    AdapterCapability capability = 5;
+}
+message AvailableAdaptersResponse {
+    repeated AdapterInfo adapters = 1;
+}
+
+
+message AdapterRequest {
+    string name = 1;
+}
+
+message CameraCapability {
+    bool can_shutdown = 1;
+    bool can_open = 2;
+
+    bool can_capture_async = 3;
+    bool can_capture = 4;
+
+    bool can_adjust_exposure = 5;
+
+    bool can_adjust_gain = 6;
+
+    bool can_adjust_gamma = 7;
+
+    bool can_adjust_black_level = 8;
+
+    bool can_adjust_frame_rate = 9;
+
+    bool can_set_frame_number = 10;
+
+    bool can_get_temperature = 11;
+
+    bool can_suspend = 12;
+    bool can_reset = 13;
+}
+
+message DeviceInfo {
+    AdapterInfo adapter = 1;
+    string manufacture = 2;
+    string id = 3;
+    string model = 4;
+    string version = 5;
+    string serial= 6;
+    CameraCapability capabilities = 7;
+}
+
+message DeviceListResponse {
+    repeated DeviceInfo devices = 1;
+}
+
+message IdRequest {
+    string id = 1;
+}
+
+message Parameter {
+    bool should_update = 1;
+    double value = 2;
+}
+message Configuration {
+    Parameter exposure = 1;
+    Parameter frame_rate = 2;
+    Parameter gain = 3;
+    Parameter black_level = 4;
+    Parameter gamma = 5;
+}
+message ConfigureRequest {
+    IdRequest id = 1;
+    Configuration config = 2;
+}
+
+message Frame {
+    google.protobuf.Timestamp timestamp = 1;
+    uint64 id = 2;
+    uint32 size = 3;
+    uint32 height = 4;
+    uint32 width = 5;
+    uint32 pixel_format = 6;
+    bytes  data = 7;
+}
+
+message FrameStream {
+    repeated Frame frames = 1;
+}
+
+message StreamingRequest {
+    IdRequest id = 1;
+    uint64 number_frames = 2;
+    // size of batch in one message. set to zero or one for real-time sending (no-cache). If batch_size > number_frames, number_frames will be used as batch_size.
+    uint64 batch_size = 4;
+}
+message Status {
+    double temperature = 1;
+    bool opened = 2;
+    bool capturing = 3;
+}
+
+enum DeviceControlAction {
+    Suspend = 0;
+    Resume = 1;
+}
+message DeviceControlRequest {
+    IdRequest id = 1;
+    DeviceControlAction action = 2;
+}
