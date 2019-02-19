@@ -1,6 +1,6 @@
 syntax = "proto3";
-package MicroVisionCGI;
-option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/cgi";
+package mvcgi;
+option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/mvcgi";
 
 import "cgi_definitions.proto";
 

@@ -1,6 +1,6 @@
 syntax = "proto3";
-package MicroVisionCGI;
-option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/cgi";
+package mvcgi;
+option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/mvcgi";
 
 import "laser_control_definitions.proto";
 import "camera_definitions.proto";
@@ -16,6 +16,6 @@ message ListDevicesRequest {
     bool use_cache = 3;
 }
 message ListDevicesResponse {
-    repeated laserctrlgrpc.SerialDeviceMapping controller = 1;
-    repeated CameraServer.DeviceInfo devices = 2;
+    repeated mvcamctrl.SerialDeviceMapping controller = 1;
+    repeated mvcam.DeviceInfo devices = 2;
 }

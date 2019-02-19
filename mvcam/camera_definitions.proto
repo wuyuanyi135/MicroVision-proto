@@ -1,8 +1,8 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
-option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/camera-backend";
+package mvcam;
+option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/mvcam";
 
-package CameraServer;
 message AdapterCapability {
     bool should_shut_down = 1;
 }
