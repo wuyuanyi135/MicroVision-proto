@@ -1,4 +1,5 @@
 syntax = "proto3";
+package laserctrlgrpc;
 option go_package = "laserctrlgrpc";
 
 import "google/protobuf/empty.proto";

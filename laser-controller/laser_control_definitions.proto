@@ -1,7 +1,6 @@
 syntax = "proto3";
+package laserctrlgrpc;
 option go_package = "laserctrlgrpc";
-
-import "error.proto";
 
 message SerialDeviceMapping {
     string name = 1;
@@ -11,9 +10,6 @@ message SerialListResponse {
     repeated SerialDeviceMapping device_list= 2;
 }
 
-message ErrorResponse {
-    repeated Error err = 1;
-}
 message EmptyResponse {
 }
 message ConnectRequest {

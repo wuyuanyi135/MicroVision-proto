@@ -1,0 +1,20 @@
+syntax = "proto3";
+package MicroVisionCGI;
+
+import "laser_control_definitions.proto";
+import "camera_definitions.proto";
+
+message GetVersionRequest {}
+message GetVersionResponse {
+    string version = 1;
+}
+
+message ListDevicesRequest {
+    string controller_url = 1;
+    string camera_url = 2;
+    bool use_cache = 3;
+}
+message ListDevicesResponse {
+    repeated laserctrlgrpc.SerialDeviceMapping controller = 1;
+    repeated CameraServer.DeviceInfo devices = 2;
+}
