@@ -1,6 +1,6 @@
 syntax = "proto3";
 package laserctrlgrpc;
-option go_package = "laserctrlgrpc";
+option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/laser-controller";
 
 message SerialDeviceMapping {
     string name = 1;
