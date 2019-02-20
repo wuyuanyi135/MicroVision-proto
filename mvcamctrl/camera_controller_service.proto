@@ -3,7 +3,7 @@ package mvcamctrl;
 option go_package = "github.com/wuyuanyi135/mvprotos/mvcamctrl";
 
 import "google/protobuf/empty.proto";
-import "protos/MicroVision-proto/mvcamctrl/camera_controller_definitions.proto";
+import "camera_controller_definitions.proto";
 service MicroVisionCameraControlService {
     rpc GetSerialDevices(google.protobuf.Empty) returns (SerialListResponse) {}
     rpc GetDriverVersion(google.protobuf.Empty) returns (DriverVersionResponse) {}
