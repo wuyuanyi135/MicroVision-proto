@@ -3,7 +3,7 @@ import "google/protobuf/empty.proto";
 import "camera_definitions.proto";
 
 package mvcam;
-option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/mvcam";
+option go_package = "github.com/wuyuanyi135/mvprotos/mvcam";
 
 // The capabilities should be checked and implemented by the frontend. However, in the GRPC layer, the capabilities should also be enforced.
 service CameraService {

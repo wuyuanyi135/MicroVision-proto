@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 package mvcam;
-option go_package = "github.com/wuyuanyi135/MicroVisionCGI/server/proto/mvcam";
+option go_package = "github.com/wuyuanyi135/mvprotos/mvcam";
 
 message AdapterCapability {
     bool should_shut_down = 1;
