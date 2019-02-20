@@ -7,5 +7,6 @@ import "cgi_definitions.proto";
 service MicroVisionCGI {
     rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
     rpc ListDevices(ListDevicesRequest) returns (ListDevicesResponse);
+    rpc ConnectDevices(ConnectDevicesRequest) returns (ConnectDevicesResponse);
 }
 
