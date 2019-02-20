@@ -6,7 +6,7 @@ package mvcam;
 option go_package = "github.com/wuyuanyi135/mvprotos/mvcam";
 
 // The capabilities should be checked and implemented by the frontend. However, in the GRPC layer, the capabilities should also be enforced.
-service CameraService {
+service MicroVisionCameraService {
     // Get the list of drivers
     rpc GetAvailableAdapters (google.protobuf.Empty) returns (AvailableAdaptersResponse) {
     }

@@ -4,7 +4,7 @@ option go_package = "github.com/wuyuanyi135/mvprotos/mvcamctrl";
 
 import "google/protobuf/empty.proto";
 import "laser_control_definitions.proto";
-service LaserControlService {
+service MicroVisionCameraControlService {
     rpc GetSerialDevices(google.protobuf.Empty) returns (SerialListResponse) {}
     rpc GetDriverVersion(google.protobuf.Empty) returns (DriverVersionResponse) {}
 
