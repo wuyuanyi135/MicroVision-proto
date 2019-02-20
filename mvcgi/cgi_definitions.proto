@@ -2,7 +2,7 @@ syntax = "proto3";
 package mvcgi;
 option go_package = "github.com/wuyuanyi135/mvprotos/mvcgi";
 
-import "laser_control_definitions.proto";
+import "camera_controller_definitions.proto";
 import "camera_definitions.proto";
 
 message GetVersionRequest {}
