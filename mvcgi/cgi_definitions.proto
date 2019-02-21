@@ -42,6 +42,4 @@ message ConnectDevicesRequest {
 
 }
 message ConnectDevicesResponse {
-    ConnectionStatus controller_connection_status = 1;
-    ConnectionStatus camera_connection_status = 2;
 }
