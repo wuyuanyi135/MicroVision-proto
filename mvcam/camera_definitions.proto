@@ -20,8 +20,9 @@ message AvailableAdaptersResponse {
 }
 
 
-message AdapterRequest {
-    string name = 1;
+message GetDevicesRequest {
+    string adapter_name = 1;
+    bool useCache = 2;
 }
 
 message CameraCapability {
@@ -60,7 +61,7 @@ message DeviceInfo {
     bool connected = 8;
 }
 
-message DeviceListResponse {
+message GetDevicesResponse {
     repeated DeviceInfo devices = 1;
 }
 

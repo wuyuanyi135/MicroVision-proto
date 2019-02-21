@@ -5,23 +5,23 @@ option go_package = "github.com/wuyuanyi135/mvprotos/mvcamctrl";
 import "google/protobuf/empty.proto";
 import "camera_controller_definitions.proto";
 service MicroVisionCameraControlService {
-    rpc GetSerialDevices(google.protobuf.Empty) returns (SerialListResponse) {}
+    rpc GetSerialDevices(GetSerialDevicesRequest) returns (SerialListResponse) {}
     rpc GetDriverVersion(google.protobuf.Empty) returns (DriverVersionResponse) {}
 
-    rpc Connect(ConnectRequest) returns (EmptyResponse) {}
-    rpc Disconnect(google.protobuf.Empty) returns (EmptyResponse) {}
+    rpc Connect(ConnectRequest) returns (google.protobuf.Empty) {}
+    rpc Disconnect(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 
     rpc GetDeviceVersion(google.protobuf.Empty) returns (DeviceVersionResponse) {}
 
-    rpc SetPower(SetPowerRequest) returns (EmptyResponse) {}
+    rpc SetPower(SetPowerRequest) returns (google.protobuf.Empty) {}
     rpc GetPower(google.protobuf.Empty) returns (PowerConfiguration) {}
 
-    rpc SetLaserParam(SetLaserRequest) returns (EmptyResponse) {}
+    rpc SetLaserParam(SetLaserRequest) returns (google.protobuf.Empty) {}
     rpc GetLaserParam(google.protobuf.Empty) returns (LaserConfiguration) {}
 
-    rpc CommitParameter(google.protobuf.Empty) returns (EmptyResponse) {}
+    rpc CommitParameter(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 
-    rpc ControlLaser(ControlLaserRequest) returns (EmptyResponse) {}
+    rpc ControlLaser(ControlLaserRequest) returns (google.protobuf.Empty) {}
 
-    rpc ResetController(google.protobuf.Empty) returns (EmptyResponse) {}
+    rpc ResetController(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }

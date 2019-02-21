@@ -5,41 +5,104 @@ option go_package = "github.com/wuyuanyi135/mvprotos/mvcgi";
 import "camera_controller_definitions.proto";
 import "camera_definitions.proto";
 
-message GetVersionRequest {}
-message GetVersionResponse {
-    string version = 1;
-}
-
-message ListDevicesRequest {
-    string controller_url = 1;
-    string camera_url = 2;
-    bool use_cache = 3;
-}
-message ListDevicesResponse {
-    repeated mvcamctrl.SerialDeviceMapping controller = 1;
-    repeated mvcam.DeviceInfo devices = 2;
+enum ConnectionStatus {
+    CONNECTED = 0;
+    DISCONNECTED = 1;
 }
 enum ConnectionAction {
     NO_OP = 0;
     CONNECT = 1;
     DISCONNECT = 2;
 }
-enum ConnectionStatus {
-    CONNECTED = 0;
-    DISCONNECTED = 1;
-}
-message ConnectDevicesRequest {
-    message ControllerConnection {
-        ConnectionAction action = 1;
-        mvcamctrl.ConnectRequest connection_info = 2;
-    }
-    message CameraConnection {
-        ConnectionAction action = 1;
-        mvcam.IdRequest connection_info = 2;
-    }
-    ControllerConnection controller_connection = 1;
-    CameraConnection camera_connection = 2;
 
+
+message GetVersionRequest {}
+message GetVersionResponse {
+    string version = 1;
 }
-message ConnectDevicesResponse {
+
+message BackendServerInterfaceRequest {
+    message Connection {
+        ConnectionAction action = 1;
+        string url = 2;
+    }
+    Connection controller_connection = 1;
+    Connection camera_connection = 2;
+}
+message BackendServerInterfaceResponse {
+    ConnectionStatus camera_server = 1;
+    ConnectionStatus controller_server = 2;
+}
+
+message ListDevicesRequest {
+    message Options {
+        // Do not re-list the hardware to ensure processing time. Only update what you already have
+        bool use_cache = 1;
+    }
+    // leave the entry empty to skip the corresponding device.
+    Options list_camera = 1;
+    Options list_controller = 2;
+}
+message ListDevicesResponse {
+    repeated mvcamctrl.SerialDeviceMapping controller = 1;
+    repeated mvcam.DeviceInfo devices = 2;
+}
+
+// after device interface request, use list device (with cache is ok) to refresh the list
+message DeviceInterfaceRequest {
+    message Options {
+        ConnectionAction action = 1;
+        string id = 2;
+    }
+    Options control_camera = 1;
+    Options control_controller = 2;
+}
+message DeviceInterfaceResponse {
+    message AffectedDevice {
+        ConnectionStatus status = 1;
+        string id = 2;
+    }
+    AffectedDevice affected_camera = 1;
+    AffectedDevice affected_controller = 2;
+}
+
+message DeviceParameterInterfaceRequest {
+    message ControllerParameters {
+        string id = 1;
+        mvcamctrl.LaserConfiguration laser = 2;
+        mvcamctrl.PowerConfiguration power = 3;
+        mvcamctrl.ControlLaserRequest enable = 4;
+    }
+    ControllerParameters controller = 1;
+
+    message CameraParameters {
+        string id = 1;
+        mvcam.Configuration config = 2;
+    }
+    CameraParameters camera = 2;
+}
+
+message DeviceParameterInterfaceResponse {
+    message ControllerParameters {
+        mvcamctrl.LaserConfiguration laser = 1;
+        mvcamctrl.PowerConfiguration power = 2;
+    }
+    ControllerParameters controller = 1;
+    message CameraParameters {
+        mvcam.Configuration config = 1;
+    }
+    CameraParameters camera = 2;
+}
+
+message CameraStreamingRequest {
+    mvcam.StreamingRequest request = 1;
+}
+message CameraStream {
+    mvcam.FrameStream frame_stream= 1;
+}
+message CameraCapturingRequest {
+    string id = 1;
+}
+message CameraCapturingResponse {
+    mvcam.Frame frame= 1;
 }

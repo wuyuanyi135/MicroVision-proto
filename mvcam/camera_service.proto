@@ -14,7 +14,7 @@ service MicroVisionCameraService {
     // Get devices with the adapter selector. If not provided, all devices are listed.
     // The requested adapter (or all) should be updated upon this invocation.
     // This function will update the id-map if cached.
-    rpc GetDevices (AdapterRequest) returns (DeviceListResponse) {}
+    rpc GetDevices (GetDevicesRequest) returns (GetDevicesResponse) {}
 
     // Get device descriptor by id. This method is rarely used. Query is mainly performed by the framework.
     // The id will be cached by framework. The GetDevices function will invalidate the cache.
