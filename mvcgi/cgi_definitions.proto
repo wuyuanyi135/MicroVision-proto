@@ -19,3 +19,29 @@ message ListDevicesResponse {
     repeated mvcamctrl.SerialDeviceMapping controller = 1;
     repeated mvcam.DeviceInfo devices = 2;
 }
+enum ConnectionAction {
+    NO_OP = 0;
+    CONNECT = 1;
+    DISCONNECT = 2;
+}
+enum ConnectionStatus {
+    CONNECTED = 0;
+    DISCONNECTED = 1;
+}
+message ConnectDevicesRequest {
+    message ControllerConnection {
+        ConnectionAction action = 1;
+        mvcamctrl.ConnectRequest connection_info = 2;
+    }
+    message CameraConnection {
+        ConnectionAction action = 1;
+        mvcam.IdRequest connection_info = 2;
+    }
+    ControllerConnection controller_connection = 1;
+    CameraConnection camera_connection = 2;
+
+}
+message ConnectDevicesResponse {
+    ConnectionStatus controller_connection_status = 1;
+    ConnectionStatus camera_connection_status = 2;
+}
