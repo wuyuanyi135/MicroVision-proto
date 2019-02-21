@@ -11,7 +11,8 @@ message SerialListResponse {
     repeated SerialDeviceMapping device_list= 2;
 }
 
-message EmptyResponse {
+message GetSerialDevicesRequest {
+    bool useCache = 1;
 }
 message ConnectRequest {
     oneof device_identifier {

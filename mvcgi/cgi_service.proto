@@ -6,7 +6,11 @@ import "cgi_definitions.proto";
 
 service MicroVisionCGI {
     rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
+    rpc BackendServerInterface(BackendServerInterfaceRequest) returns (BackendServerInterfaceResponse);
     rpc ListDevices(ListDevicesRequest) returns (ListDevicesResponse);
-    rpc ConnectDevices(ConnectDevicesRequest) returns (ConnectDevicesResponse);
+    rpc DeviceInterface(DeviceInterfaceRequest) returns (DeviceInterfaceResponse);
+    rpc DeviceParameterInterface(DeviceParameterInterfaceRequest) returns(DeviceParameterInterfaceResponse);
+    rpc CameraStreaming(CameraStreamingRequest) returns (stream CameraStream);
+    rpc CameraCapturing(CameraCapturingRequest) returns (CameraCapturingResponse);
 }
 
