@@ -5,6 +5,7 @@ option go_package = "github.com/wuyuanyi135/mvprotos/mvcamctrl";
 message SerialDeviceMapping {
     string name = 1;
     string destination = 2;
+    bool connected = 3;
 }
 message SerialListResponse {
     repeated SerialDeviceMapping device_list= 2;
