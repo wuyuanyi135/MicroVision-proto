@@ -57,6 +57,7 @@ message DeviceInfo {
     string version = 5;
     string serial= 6;
     CameraCapability capabilities = 7;
+    bool connected = 8;
 }
 
 message DeviceListResponse {
