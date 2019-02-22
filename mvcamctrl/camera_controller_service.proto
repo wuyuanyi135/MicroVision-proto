@@ -9,7 +9,7 @@ service MicroVisionCameraControlService {
     rpc GetDriverVersion(google.protobuf.Empty) returns (DriverVersionResponse) {}
 
     rpc Connect(ConnectRequest) returns (google.protobuf.Empty) {}
-    rpc Disconnect(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc Disconnect(ConnectRequest) returns (google.protobuf.Empty) {}
 
     rpc GetDeviceVersion(google.protobuf.Empty) returns (DeviceVersionResponse) {}
 
