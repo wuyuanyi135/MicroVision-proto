@@ -22,7 +22,7 @@ message AvailableAdaptersResponse {
 
 message GetDevicesRequest {
     string adapter_name = 1;
-    bool useCache = 2;
+    bool use_cache = 2;
 }
 
 message CameraCapability {
