@@ -1,0 +1,43 @@
+syntax = "proto3";
+package mvcgi;
+option go_package = "github.com/wuyuanyi135/mvprotos/mvcgi";
+import "google/protobuf/timestamp.proto";
+
+message DevicePair {
+    // the id is disregarded when creating the device pair
+    uint64 id = 1;
+    string camera_id = 2;
+    string controller_id = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+message CreateDevicePairRequest {
+    DevicePair device = 1;
+}
+message CreateDevicePairResponse {}
+message ListDevicePairRequest {}
+message ListDevicePairResponse {
+    repeated DevicePair devices = 1;
+}
+message UpdateDevicePairRequest {
+    oneof device {
+        uint64 id = 1;
+        DevicePair device_pair = 2;
+    }
+    DevicePair new_value = 3;
+}
+message UpdateDevicePairResponse {}
+message DeleteDevicePairRequest {
+    oneof device {
+        uint64 id = 1;
+        DevicePair device_pair = 2;
+    }
+}
+message DeleteDevicePairResponse {}
+
+// Manage the stored device pair. Device discovery is not handled in this service.
+service DevicePairService {
+    rpc Create (CreateDevicePairRequest) returns (CreateDevicePairResponse);
+    rpc List (ListDevicePairRequest) returns (ListDevicePairResponse);
+    rpc Update (UpdateDevicePairRequest) returns (UpdateDevicePairResponse);
+    rpc Delete (DeleteDevicePairRequest) returns (DeleteDevicePairResponse);
+}
