@@ -1,0 +1,40 @@
+syntax = "proto3";
+package mvcgi;
+option go_package = "github.com/wuyuanyi135/mvprotos/mvcgi";
+import "google/protobuf/empty.proto";
+message ConnectionRequest {
+    oneof device{
+        string camera_id = 1;
+        string controller_id = 2;
+    }
+}
+message ConnectResponse {
+    string id = 1;
+    string display_name = 2;
+    bool connected = 3;
+}
+message DisconnectAllRequest {
+    bool disconnect_camera = 1;
+    bool disconnect_controller = 2;
+}
+
+message DiscoveryDevicesRequest {
+    bool discover_camera = 1;
+    bool discover_controller = 2;
+}
+message Device {
+    string id = 1;
+    string display_name = 2;
+    bool connected = 3;
+}
+message DiscoveryDevicesResponse {
+    repeated Device discovered_camera = 1;
+    repeated Device discovered_controller = 2;
+}
+// Find connected devices and track the connection state
+service DeviceConnectionService {
+    rpc Connect(ConnectionRequest) returns (google.protobuf.Empty);
+    rpc Disconnect(ConnectionRequest) returns (google.protobuf.Empty);
+    rpc DisconnectAll(DisconnectAllRequest) returns (google.protobuf.Empty);
+    rpc DiscoveryDevices(DiscoveryDevicesRequest) returns (DiscoveryDevicesResponse);
+}
