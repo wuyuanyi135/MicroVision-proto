@@ -5,9 +5,13 @@ import "google/protobuf/timestamp.proto";
 
 message DevicePair {
     // the id is disregarded when creating the device pair
+    message Device {
+        string id = 1;
+        string display_name = 2;
+    }
     uint64 id = 1;
-    string camera_id = 2;
-    string controller_id = 3;
+    Device camera = 2;
+    Device controller = 3;
     google.protobuf.Timestamp created_at = 4;
 }
 message CreateDevicePairRequest {
