@@ -3,9 +3,7 @@ import "google/protobuf/timestamp.proto";
 package mvcam;
 option go_package = "github.com/wuyuanyi135/mvprotos/mvcam";
 
-message AdapterCapability {
-    bool should_shut_down = 1;
-}
+
 message AdapterInfo {
     string name = 1;
     string version = 2;
@@ -13,7 +11,6 @@ message AdapterInfo {
     // adapter initialized successfully
     bool in_use = 4;
 
-    AdapterCapability capability = 5;
 }
 message AvailableAdaptersResponse {
     repeated AdapterInfo adapters = 1;
@@ -25,31 +22,6 @@ message GetDevicesRequest {
     bool use_cache = 2;
 }
 
-message CameraCapability {
-    bool can_shutdown = 1;
-    bool can_open = 2;
-
-    bool can_capture_async = 3;
-    bool can_capture = 4;
-
-    bool can_adjust_exposure = 5;
-
-    bool can_adjust_gain = 6;
-
-    bool can_adjust_gamma = 7;
-
-    bool can_adjust_black_level = 8;
-
-    bool can_adjust_frame_rate = 9;
-
-    bool can_set_frame_number = 10;
-
-    bool can_get_temperature = 11;
-
-    bool can_suspend = 12;
-    bool can_reset = 13;
-}
-
 message DeviceInfo {
     AdapterInfo adapter = 1;
     string manufacture = 2;
@@ -57,7 +29,6 @@ message DeviceInfo {
     string model = 4;
     string version = 5;
     string serial= 6;
-    CameraCapability capabilities = 7;
     bool connected = 8;
 }
 
@@ -70,8 +41,9 @@ message IdRequest {
 }
 
 message Parameter {
-    bool should_update = 1;
     double value = 2;
+    double min = 3;
+    double max = 4;
 }
 message Configuration {
     Parameter exposure = 1;
@@ -83,6 +55,7 @@ message Configuration {
 message ConfigureRequest {
     IdRequest id = 1;
     Configuration config = 2;
+    bool query = 3; // request min, max, etc.
 }
 
 message Frame {
