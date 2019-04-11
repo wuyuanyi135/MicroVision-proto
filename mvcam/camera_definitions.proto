@@ -55,7 +55,6 @@ message Configuration {
 message ConfigureRequest {
     IdRequest id = 1;
     Configuration config = 2;
-    bool query = 3; // request min, max, etc.
 }
 
 message Frame {
