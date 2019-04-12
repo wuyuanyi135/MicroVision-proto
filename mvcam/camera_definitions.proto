@@ -12,32 +12,9 @@ message AdapterInfo {
     bool in_use = 4;
 
 }
-message AvailableAdaptersResponse {
-    repeated AdapterInfo adapters = 1;
-}
-
-
-message GetDevicesRequest {
-    string adapter_name = 1;
-    bool use_cache = 2;
-}
-
-message DeviceInfo {
-    AdapterInfo adapter = 1;
-    string manufacture = 2;
-    string id = 3;
-    string model = 4;
-    string version = 5;
-    string serial= 6;
-    bool connected = 8;
-}
-
-message GetDevicesResponse {
-    repeated DeviceInfo devices = 1;
-}
-
-message IdRequest {
-    string id = 1;
+enum DeviceControlAction {
+    Suspend = 0;
+    Resume = 1;
 }
 
 message Parameter {
@@ -45,6 +22,7 @@ message Parameter {
     double min = 3;
     double max = 4;
 }
+
 message Configuration {
     Parameter exposure = 1;
     Parameter frame_rate = 2;
@@ -52,11 +30,6 @@ message Configuration {
     Parameter black_level = 4;
     Parameter gamma = 5;
 }
-message ConfigureRequest {
-    IdRequest id = 1;
-    Configuration config = 2;
-}
-
 message Frame {
     google.protobuf.Timestamp timestamp = 1;
     uint64 id = 2;
@@ -66,28 +39,13 @@ message Frame {
     uint32 pixel_format = 6;
     bytes  data = 7;
 }
-
-message FrameStream {
-    repeated Frame frames = 1;
-}
-
-message StreamingRequest {
-    IdRequest id = 1;
-    uint64 number_frames = 2;
-    // size of batch in one message. set to zero or one for real-time sending (no-cache). If batch_size > number_frames, number_frames will be used as batch_size.
-    uint64 batch_size = 4;
+message DeviceInfo {
+    string manufacture = 2;
+    string id = 3;
+    string model = 4;
+    string version = 5;
+    string serial= 6;
 }
 message Status {
     double temperature = 1;
-    bool opened = 2;
-    bool capturing = 3;
-}
-
-enum DeviceControlAction {
-    Suspend = 0;
-    Resume = 1;
-}
-message DeviceControlRequest {
-    IdRequest id = 1;
-    DeviceControlAction action = 2;
 }
