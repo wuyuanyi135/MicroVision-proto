@@ -1,0 +1,142 @@
+syntax = "proto3";
+package mvpulse;
+option go_package = "github.com/wuyuanyi135/mvprotos/mvpulse";
+
+import "pulse_definitions.proto";
+
+
+
+message ControlLaserRequest {
+    bool enable = 1;
+}
+
+message Status {
+    bool laser_state = 2;
+}
+
+///////
+// Message
+message GetDevicesReq {}
+message GetDevicesRes {
+    repeated SerialDevice devices = 1;
+}
+
+// Message
+message DriverVersionReq {}
+message DriverVersionRes {
+    string version = 1;
+}
+
+// Message
+message ConnectReq {
+    oneof device_identifier {
+        string name = 1;
+        string path = 2;
+    }
+}
+message ConnectRes {}
+
+// Message
+message DisconnectReq {}
+message DisconnectRes {}
+
+// Message
+message DeviceVersionReq {}
+message DeviceVersionRes {
+    uint32 hardware_version = 2;
+    uint32 firmware_version = 3;
+}
+
+// Message
+message SetPowerReq {
+    PowerConfiguration power = 1;
+}
+message SetPowerRes {}
+
+// Message
+message GetPowerReq {}
+message GetPowerRes {
+    PowerConfiguration power = 1;
+}
+
+// Message
+message SetPulseParamReq {
+    PulseConfiguration pulse = 1;
+    bool commit = 2;
+}
+message SetPulseParamRes {}
+
+// Message
+message GetPulseParamReq {}
+message GetPulseParamRes {
+    PulseConfiguration pulse = 1;
+}
+
+// Message
+message CommitParameterReq {}
+message CommitParameterRes {}
+
+// Message
+message SetTriggerArmReq {
+    bool arm_trigger = 1;
+}
+message SetTriggerArmRes {}
+
+// Message
+message GetTriggerArmReq {}
+message GetTriggerArmRes {
+    bool arm_trigger = 1;
+}
+
+// Message
+message ResetReq {}
+message ResetRes {}
+
+// Message
+message OpenedReq {}
+message OpenedRes {
+    bool opened = 1;
+    SerialDevice opened_device = 2;
+}
+
+
+// Message
+message ParameterStream {
+    // status: disregarded in the request stream
+    bool opened = 1;
+    bool trigger_armed = 2;
+
+    PulseConfiguration pulse = 3;
+    PowerConfiguration power = 4;
+}
+
+
+service MicroVisionPulseService {
+    rpc GetDevices (GetDevicesReq) returns (GetDevicesRes) {}
+    rpc DriverVersion (DriverVersionReq) returns (DriverVersionRes) {}
+
+    rpc Connect (ConnectReq) returns (ConnectRes) {}
+    rpc Disconnect (DisconnectReq) returns (DisconnectRes) {}
+
+    rpc DeviceVersion (DeviceVersionReq) returns (DeviceVersionRes) {}
+
+    rpc SetPower (SetPowerReq) returns (SetPowerRes) {}
+    rpc GetPower (GetPowerReq) returns (GetPowerRes) {}
+
+    rpc SetPulseParam (SetPulseParamReq) returns (SetPulseParamRes) {}
+    rpc GetPulseParam (GetPulseParamReq) returns (GetPulseParamRes) {}
+
+    rpc CommitParameter (CommitParameterReq) returns (CommitParameterRes) {}
+
+    rpc SetTriggerArm (SetTriggerArmReq) returns (SetTriggerArmRes) {}
+    rpc GetTriggerArm (GetTriggerArmReq) returns (GetTriggerArmRes) {}
+
+    rpc Reset (ResetReq) returns (ResetRes) {
+    }
+
+    rpc Opened (OpenedReq) returns (OpenedRes) {
+    }
+
+    rpc ParameterStreaming (stream ParameterStream) returns (stream ParameterStream) {
+    }
+}

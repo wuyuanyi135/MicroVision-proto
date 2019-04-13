@@ -2,7 +2,7 @@ syntax = "proto3";
 package mvcgi;
 option go_package = "github.com/wuyuanyi135/mvprotos/mvcgi";
 
-import "camera_controller_definitions.proto";
+import "pulse_definitions.proto";
 import "camera_definitions.proto";
 
 enum ConnectionStatus {

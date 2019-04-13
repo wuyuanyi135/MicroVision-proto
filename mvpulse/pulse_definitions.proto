@@ -1,0 +1,18 @@
+syntax = "proto3";
+package mvpulse;
+option go_package = "github.com/wuyuanyi135/mvprotos/mvpulse";
+
+message SerialDevice {
+    string name = 1;
+    string path = 2;
+}
+message PowerConfiguration {
+    bool master_power = 1;
+}
+
+
+message PulseConfiguration {
+    uint32 exposure_tick = 1;
+    uint32 pulse_delay = 2;
+    uint32 digital_filter = 3;
+}
