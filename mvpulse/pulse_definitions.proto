@@ -1,6 +1,7 @@
 syntax = "proto3";
 package mvpulse;
 option go_package = "github.com/wuyuanyi135/mvprotos/mvpulse";
+import "google/protobuf/wrappers.proto";
 
 message SerialDevice {
     string name = 1;
@@ -10,9 +11,10 @@ message PowerConfiguration {
     bool master_power = 1;
 }
 
-
+// Use the wrapper instead of primitives for nullable types
 message PulseConfiguration {
-    uint32 exposure_tick = 1;
-    uint32 pulse_delay = 2;
-    uint32 digital_filter = 3;
+    google.protobuf.UInt32Value exposure_tick = 1;
+    google.protobuf.UInt32Value pulse_delay = 2;
+    google.protobuf.UInt32Value digital_filter = 3;
+    google.protobuf.BoolValue polarity = 4;
 }
